@@ -1,0 +1,12 @@
+{
+	"name" : "Emberjs",
+	"type" : "plugin",
+	"description": "Ember.js utility",
+
+	"author": "Mohammad Saleh Souzanchi",
+	"authorEmail": "saleh.souzanchi@gmail.com",
+	"authorUrl": "http://soozanchi.ir",
+	
+	"Events" : [],
+	"Blocks" : []
+}

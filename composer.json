@@ -1,0 +1,20 @@
+{
+  "name": "zoghal/emberjs",
+  "type": "cakephp-plugin",
+  "description": "CakePHP Ember.js Plugin",
+  "keywords": ["cakephp"],
+  "authors": [
+    {
+      "name": "Saleh Souzanchi",
+      "homepage": "http://cakephp.ir",
+      "email": "saleh.souzanchi@gmail.com"
+    },
+    {
+      "name": "electblake",
+      "email": "electblake@gmail.com"
+    }
+  ],
+  "require": {
+    "composer/installers": "*"
+  }
+}

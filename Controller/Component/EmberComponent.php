@@ -20,7 +20,7 @@ class EmberComponent extends Component{
 	
 	public function startup(Controller $controller){
 	  if (isset($controller->request->params['prefix']) and $controller->request->params['prefix'] == 'api' ){
-	  	//	$controller->RequestHandler->renderAs($controller,'json');
+	  		$controller->RequestHandler->renderAs($controller,'json');
 	  		//$controller->autoRender = false;
 	  }	
 	}

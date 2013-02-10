@@ -2,10 +2,6 @@
 App::uses('Serializers','Emberjs.Lib');
 class EmberBehavior extends ModelBehavior {
 
-
-
-
-
 	/**
 	 * SerializerBehavior::setup()
 	 * 
@@ -16,9 +12,7 @@ class EmberBehavior extends ModelBehavior {
 	public function setup(Model $Model, $settings = array()) {
 	//	if (!isset($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias] = false;
-		//}
-	//	$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], $settings);
-		
+			
 	}
 
 
@@ -29,7 +23,7 @@ class EmberBehavior extends ModelBehavior {
 	 * @param bool $status
 	 * @return void
 	 */
-	public function serialized(Model $Model,$config = false) {
+	public function serialized(Model $Model,$config = array()) {
 //		$args = func_get_args();
 	//	$contain = call_user_func_array('am', array_slice($args, 1));
 		$this->settings[$Model->alias]	 = $config;		
@@ -63,17 +57,13 @@ class EmberBehavior extends ModelBehavior {
 	 * @return
 	 */
 	public function afterFind(Model $Model, $results, $primary) {
-		if(is_array($this->settings[$Model->alias]) ){
+		if($primary and  !empty($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias]['model'] = $Model->alias;
-			$Serializers =  new Serializers($results,$this->settings[$Model->alias]);
-				//return Hash::maxDimensions($results);
-			$results = $Serializers->convert();
-			
-		}
+			$Serializers =  new Serializers();
+			$results = $Serializers->convert($results,$this->settings[ $Model->alias]);
+		}	
+		
 		return $results;
-	}	
-	
-	
-
-
+			
+	}
 }

@@ -28,44 +28,73 @@ class Serializers {
 	 * @param mixed $config
 	 * @return void
 	 */
-	public function __construct($data,$config,$include=false) {
-					
-		$this->data = $data;
-		$this->config = $config;
-		
-	}
-
-
-	public function  convert(){
-		
-		if ( !is_array($this->data) or empty($this->data)){
-			return array();
-		}
-		
-		$this->checkConfig($this->config);
-		$this->checkInclude($this->include);
-		
-		$res = $this->scan($this->data);
-		return $this->output;
-	}
 
 	
-	private function scan($data,$level=0) {
-		if (!isset($data[0])){
-			$data = array($data);
-		}
-		$model = $this->config['model'];
+
+
+	public function  convert($data=false,$options= false){
+		if (!$data) {
+			return $data;
+		};
+		$isMany = false;
+		if( !isset($data[0]) ) {
+			$data = array($data);	
+		}		
+		
 		foreach($data as $key => $val){
-		//	if (isset($val[0])){
-//				return $this->scan($val,0);
-//			}
-	
-			$res = $val[$model];
-			unset($val[$this->config['model']]);
-			$res = Hash::merge($res,$this->relations($val,$this->include));
-			$this->output[] = $res;
-			//$val[$key] = 
+				rlog($val,'xxx');
+			
+				$keysss = array(array_keys($val));
+				$model = key($val);
+				if( is_int($key and !Hash::numeric()) ){
+									rlog( $model);
+
+				}
 		}
+
+
+		return $data;
+	}
+
+
+	protected function CakeToEntity($data){
+		reset($data);
+		$key = key($data);
+		$out = array();
+		$out[$key] = $data[$key];
+		unset($data[$key]);
+		$out = Hash::merge( $out ,$data );
+	//	rlog($out);
+		pr($out);
+		return $out;
+	}
+
+
+
+	public function scan($data,$level=0) {
+		rlog('asd');
+
+		    
+//	
+//		$v = function($x,$vz){
+//			//pr($x);
+//			//pr($vz);
+//			return true;
+//		};
+//		$key = array_reduce($data,$v);
+//		rlog($key);
+		
+//		foreach($data as $key => $val){
+//		//	if (isset($val[0])){
+////				return $this->scan($val,0);
+////			}
+//	
+//			$res = $val[$model];
+//			unset($val[$this->config['model']]);
+//			$res = Hash::merge($res,$this->relations($val,$this->include));
+//			$this->output[] = $res;
+//			//$val[$key] = 
+//		}
 		return $data;			
 	}
 
@@ -134,13 +163,17 @@ class Serializers {
 
 		}
 		
-		
 		if (!$deep){
 			$this->include = $include;
 		}
     	return $include;
 	}
 
+
+
+	private function allIndexIsNumbric( $data ){
+		
+	}
 
 	
 	public	function err($str){

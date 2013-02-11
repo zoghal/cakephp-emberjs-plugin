@@ -24,8 +24,8 @@ class EmberBehavior extends ModelBehavior {
 	 * @return void
 	 */
 	public function serialized(Model $Model,$config = array()) {
-//		$args = func_get_args();
-	//	$contain = call_user_func_array('am', array_slice($args, 1));
+		$args = func_get_args();
+		$contain = call_user_func_array('am', array_slice($args, 1));
 		$this->settings[$Model->alias]	 = $config;		
 	
 	}	

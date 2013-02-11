@@ -36,27 +36,28 @@ class Serializers {
 		if (!$data) {
 			return $data;
 		};
-		$isMany = false;
-		if( !isset($data[0]) ) {
-			$data = array($data);	
-		}		
-		
-		foreach($data as $key => $val){
-				rlog($val,'xxx');
-			
-				$keysss = array(array_keys($val));
-				$model = key($val);
-				if( is_int($key and !Hash::numeric()) ){
-									rlog( $model);
-
-				}
+		if (!isset($data[0])) {
+			$data = array($data);
 		}
+					
+		
+		
+		 		
+		$this->scan($data);
 
-
-		return $data;
 	}
 
-
+	public function scan($data) {
+		
+		foreach($data as $key => $record){
+			$rep = $this->analize($key,$record);
+		}
+	}
+	
+	
+	public function analize($key,$record){
+		rlog($record);
+	}
 	protected function CakeToEntity($data){
 		reset($data);
 		$key = key($data);
@@ -71,7 +72,7 @@ class Serializers {
 
 
 
-	public function scan($data,$level=0) {
+	public function sc11an($data,$level=0) {
 		rlog('asd');
 
 		    
